@@ -32,15 +32,25 @@
 
   }
 
+  database.ref().child("employees").push({
+      name: "Mister push",
+      role: "Push",
+      months_worked: 12,
+      monthly_rate: 12,
+      start_date: 12,
+      dateAdded:  firebase.database.ServerValue.TIMESTAMP
+  });
+
   $(document).ready(function(e){
 
     database.ref().orderByChild("dateAdded").on("child_added",function(snap){
 
-      console.log(snap.val());
+      console.log(Object.keys(snap.val()));
+      let keys = Object.keys(snap.val());
 
-      for(let i = 0 ; i < snap.val().length ; i++){
+      for(let i = 0 ; i < keys.length ; i++){
 
-        renderRow(snap.val()[i]).appendTo("body");
+        renderRow(snap.val()[i]).appendTo("#data");
 
       }
 
@@ -50,7 +60,7 @@
 
   		e.preventDefault();
 
-      
+
 
 
   	});
