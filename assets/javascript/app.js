@@ -34,13 +34,13 @@
 
   $(document).ready(function(e){
 
-    database.ref().on("child_added",function(snap){
+    database.ref().orderByChild("dateAdded").on("child_added",function(snap){
 
       console.log(snap.val());
 
       for(let i = 0 ; i < snap.val().length ; i++){
 
-        renderRow(snap.val()[i]).appendTo("#data");
+        renderRow(snap.val()[i]).appendTo("body");
 
       }
 
@@ -50,6 +50,7 @@
 
   		e.preventDefault();
 
+      
 
 
   	});
