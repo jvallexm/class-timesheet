@@ -10,24 +10,10 @@
   firebase.initializeApp(config);
 
   const database = firebase.database();
-  const connections = database.ref("connections");
-  const connected   = database.ref(".info/connected");
 
-  const employeeDb = database.ref("employees");
+  database.ref().on("child_added",function(snap){
 
-  connected.on("value", function(snap) {
-
-	  if (snap.val()) {
-	  	console.log("connected");
-	    const con = connections.push(true);
-	    con.onDisconnect().remove();
-	  }
-
-  });
-
-  database.ref().on("value",function(snap){
-
-  		console.log(snap.val().employees);
+  		console.log(snap.val());
 
   });
 
