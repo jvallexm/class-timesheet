@@ -14,14 +14,17 @@
   function renderRow(obj){
 
     console.log("trying to render " + JSON.stringify(obj));
+
     let newRow = $("<div>").addClass("row");
-    newRow.append(newCol(obj.name));
-    newRow.append(newCol(obj.role));
-    newRow.append(newCol(obj.start_date));
-    newRow.append(newCol(obj.monthly_rate));
-    newRow.append(newCol(obj.months_worked));
     let mult = obj.monthly_rate * obj.months_worked;
-    newRow.append(newCol(mult));
+
+    newRow.append(newCol(obj.name))
+          .append(newCol(obj.role))
+          .append(newCol(obj.start_date))
+          .append(newCol(obj.monthly_rate))
+          .append(newCol(obj.months_worked))
+          .append(newCol(mult));
+
     return newRow;
 
   }
@@ -37,6 +40,8 @@
 
     database.ref().orderByChild("dateAdded").on("child_added",function(snap){
 
+      console.log("child added!");
+
       console.log(Object.keys(snap.val()));
       let keys = Object.keys(snap.val());
 
@@ -48,32 +53,39 @@
 
     });
 
+    database.ref("employees").orderByChild('dateAdded').limitToLast(1).on('child_added', function(snap){
+
+      console.log("adding new child");
+      renderRow(snap.val()).appendTo("#data");
+
+    });
+
   	$("#form").submit(function(e){
 
   		e.preventDefault();
 
-      let name = $("#name");
-      let role = $("#role");
-      let months_worked = $("#months_worked");
-      let monthly_rate = $("#monthly_rate");
-      let start_date = $("#start_date");
+      let name          = $("#name");
+      let role          = $("#role");
+      let months_worked = $("#months-worked");
+      let monthly_rate  = $("#monthly-rate");
+      let start_date    = $("#start-date");
       
       database.ref().child("employees").push({
 
-          name: name.val().trim(),
-          role: role.val().trim(),
+          name:          name.val().trim(),
+          role:          role.val().trim(),
           months_worked: months_worked.val().trim(),
-          monthly_rate: monthly_rate.val().trim(),
-          start_date: start_date.val().trim(),
-          dateAdded:  firebase.database.ServerValue.TIMESTAMP
+          monthly_rate:  monthly_rate.val().trim(),
+          start_date:    start_date.val().trim(),
+          dateAdded:     firebase.database.ServerValue.TIMESTAMP
 
       });
 
-      name.empty();
-      role.empty();
-      monthly_rate.empty();
-      months_worked.empty();
-      start_date.empty();
+      name.val("");
+      role.val("");
+      monthly_rate.val("");
+      months_worked.val("");
+      start_date.val("");
 
   	});
 
