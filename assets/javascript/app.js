@@ -11,19 +11,22 @@
 
   const database = firebase.database();
 
+  // Reders new rows
+
   function renderRow(obj){
 
     console.log("trying to render " + JSON.stringify(obj));
 
     let newRow = $("<div>").addClass("row");
-    let mult = obj.monthly_rate * obj.months_worked;
+    let monthsWorked = Math.abs(moment(obj.start_date).diff(moment(),"months"));
+    let totalPay = obj.monthly_rate * monthsWorked;
 
     newRow.append(newCol(obj.name))
           .append(newCol(obj.role))
           .append(newCol(obj.start_date))
+          .append(newCol(monthsWorked))
           .append(newCol(obj.monthly_rate))
-          .append(newCol(obj.months_worked))
-          .append(newCol(mult));
+          .append(newCol(totalPay));
 
     return newRow;
 
