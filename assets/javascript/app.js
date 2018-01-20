@@ -1,3 +1,5 @@
+  // Initialize firebase
+
   const config = {
     apiKey: "AIzaSyAUTYX7lHRsFxh1djAbnrBVfOvJDD2Sd3g",
     authDomain: "classtrainproject.firebaseapp.com",
@@ -9,9 +11,9 @@
 
   firebase.initializeApp(config);
 
-  const database = firebase.database();
+  const database = firebase.database(); //Reference to database
 
-  // Reders new rows
+  // Reders new rows based on an object passed as a parameter
 
   function renderRow(obj){
 
@@ -32,6 +34,8 @@
 
   }
 
+  // Returns a new column based on data
+
   function newCol(data){
 
     return $("<div>").addClass("col-md-2")
@@ -39,14 +43,17 @@
 
   }
 
+  // when the document is ready
+
   $(document).ready(function(e){
+
+    // Gets all the database children and appends new rows to #data  
 
     database.ref().orderByChild("dateAdded").on("child_added",function(snap){
 
       console.log("child added!");
 
-      console.log(Object.keys(snap.val()));
-      let keys = Object.keys(snap.val());
+      let keys = Object.keys(snap.val()); // List of object keys
 
       for(let i = 0 ; i < keys.length ; i++){
 
