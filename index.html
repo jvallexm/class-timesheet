@@ -20,9 +20,16 @@ q<!DOCTYPE html>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Current Employees</h3>
-        </div>"
+        </div>
         <div class="panel-body" id="data">
-            <div class"row"></div>
+            <div class="row">
+                <div class="col-md-2" id="heading">Employee Name</div>
+                <div class="col-md-2" id="heading">Role</div>
+                <div class="col-md-2" id="heading">Start Date</div>
+                <div class="col-md-2" id="heading">Months Worked</div>
+                <div class="col-md-2" id="heading">Monthly Rate ($)</div>
+                <div class="col-md-2" id="heading">Total Billed ($)</div>
+            </div>
         </div>
     </div>
 
@@ -34,23 +41,23 @@ q<!DOCTYPE html>
             <form id="form">
                 <div class="form-group">
                     <label for="InputName">Employee Name</label>
-                    <input type="email" class="form-control" id="name" placeholder="name">
+                    <input type="text" class="form-control" id="name" placeholder="name">
                 </div>
                 <div class="form-group">
                     <label for="inputRole">Role</label>
-                    <input type="password" class="form-control" id="role" placeholder="role">
+                    <input type=text" class="form-control" id="role" placeholder="role">
                 </div>
                 <div class="form-group">
                     <label for="inputStartDate">Start Date</label>
-                    <input type="password" class="form-control" id="start-date" placeholder="start">
+                    <input type="text" class="form-control" id="start-date" placeholder="start">
                 </div>
                 <div class="form-group">
                     <label for="inputMonthsWorked">Months Worked</label>
-                    <input type="password" class="form-control" id="months-worked" placeholder="months">
+                    <input type="text" class="form-control" id="months-worked" placeholder="months">
                 </div>
                 <div class="form-group">
                     <label for="inputMonthlyRate">Monthly Rate ($)</label>
-                    <input type="password" class="form-control" id="monthly-rate" placeholder="rate">
+                    <input type="text" class="form-control" id="monthly-rate" placeholder="rate">
                 </div>
                 <button type="submit" class="btn btn-primary" id="submit">Submit</button>
             </form>
